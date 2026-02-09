@@ -2,3 +2,4 @@ set clipboard+=unnamed
 
 set nohlsearch
 set incsearch
+set relativenumber
