@@ -1,6 +1,32 @@
 // Place your key bindings in this file to override the defaults
 [
   {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.openGlobalSettings"
+  },
+  {
+    "key": "alt+i",
+    "command": "aws.amazonq.inline.invokeChat",
+    "when": "aws.codewhisperer.connected && editorTextFocus"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-aws.amazonq.inline.invokeChat",
+    "when": "aws.codewhisperer.connected && editorTextFocus"
+  },
+  {
+    "key": "alt+c",
+    "command": "aws.amazonq.focusChat"
+  },
+  {
+    "key": "alt+y",
+    "command": "merge-conflict.accept.incoming"
+  },
+  {
+    "key": "alt+b",
+    "command": "merge-conflict.accept.current"
+  },
+  {
     "key": "ctrl+w",
     "command": "-extension.vim_ctrl+w",
     "when": "editorTextFocus && vim.active && vim.use<C-w> && !inDebugRepl"
