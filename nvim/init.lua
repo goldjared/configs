@@ -253,19 +253,20 @@ vim.o.mouse = 'a'
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
+
 -- For wsl sys clip
-vim.g.clipboard = {
- name = 'WslClipboard',
- copy = {
- ["+"] = 'clip.exe',
- ["*"] = 'clip.exe',
- },
- paste = {
- ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
- ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-},
- cache_enabled = 0,
- }
+-- vim.g.clipboard = {
+--  name = 'WslClipboard',
+--  copy = {
+--  ["+"] = 'clip.exe',
+--  ["*"] = 'clip.exe',
+--  },
+--  paste = {
+--  ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+--  ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+-- },
+--  cache_enabled = 0,
+--  }
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -409,7 +410,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- See `:help nvim-treesitter`
 -- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
 vim.defer_fn(function()
-  require('nvim-treesitter.configs').setup {
+  require('nvim-treesitter.config').setup {
     -- Add languages to be installed here that you want installed for treesitter
     ensure_installed = { 'c', 'lua', 'python', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'java' },
 
@@ -555,7 +556,7 @@ local servers = {
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
-  tsserver = {},
+  -- tsserver = {},
   html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
@@ -581,16 +582,17 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-}
+-- [deprecated] https://github.com/mason-org/mason-lspconfig.nvim/releases/tag/v2.0.0
+-- mason_lspconfig.setup_handlers {
+--   function(server_name)
+--     require('lspconfig')[server_name].setup {
+--       capabilities = capabilities,
+--       on_attach = on_attach,
+--       settings = servers[server_name],
+--       filetypes = (servers[server_name] or {}).filetypes,
+--     }
+--   end,
+-- }
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
